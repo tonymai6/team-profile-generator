@@ -44,3 +44,79 @@ function html() {
     console.log("Finished! File saved as index.html")
     fs.writeFile("index.html", htmlFull, function (err) { if (err) throw err; })
 }
+
+//Empty array for team member data input in CLI to crete employee cards
+var outputAns = []
+
+
+//Welcome message 
+console.log("\n***\n Welcome to Team Profile generator! \nType your response to each prompt and press enter to submit. \n***\n")
+
+//User prompts
+inquirer
+    //Create a manager
+    .prompt([
+        {
+            message: 'Manager name:',
+            type: 'input',
+            name: 'manName',
+            validate: input => {
+                if (input) {
+                    return true;
+                }
+                else {
+                    console.log("Please enter a name")
+                }
+            }
+        },
+        {
+            message: 'Manager ID:',
+            type: 'input',
+            name: 'manId',
+            validate: input => {
+                if (input) {
+                    return true;
+                }
+                else {
+                    console.log("Please enter an ID")
+                }
+            }
+        },
+        {
+            message: 'Manager email address:',
+            type: 'input',
+            name: 'manEmail',
+            validate: input => {
+                if (input) {
+                    return true;
+                }
+                else {
+                    console.log("Please enter an email")
+                }
+            }
+        },
+        {
+            message: 'Manager office number:',
+            type: 'input',
+            name: 'manOffice',
+            validate: input => {
+                if (input) {
+                    return true;
+                }
+                else {
+                    console.log("Please enter an office number")
+                }
+            }
+        },
+        {
+            message: 'Choose next employee below:',
+            type: 'list',
+            name: 'add',
+            choices: [
+                "Intern",
+                "Engineer",
+                "I am finished",
+            ]
+        }
+
+    ])
