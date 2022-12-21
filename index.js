@@ -162,3 +162,113 @@ inquirer
             html();
         }
     })
+
+    function addIntern() {
+        inquirer
+            //Create an intern
+            .prompt([
+                {
+                    message: "Intern name:",
+                    type: "input",
+                    name: "intName",
+                    validate: input => {
+                        if (input) {
+                            return true;
+                        }
+                        else {
+                            console.log("Please enter a name")
+                        }
+                    }
+                },
+                {
+                    message: "Intern ID:",
+                    type: "input",
+                    name: "intId",
+                    validate: input => {
+                        if (input) {
+                            return true;
+                        }
+                        else {
+                            console.log("Please enter an ID")
+                        }
+                    }
+                },
+                {
+                    message: "Intern email:",
+                    type: "input",
+                    name: "intEmail",
+                    validate: input => {
+                        if (input) {
+                            return true;
+                        }
+                        else {
+                            console.log("Please enter an email")
+                        }
+                    }
+                },
+                {
+                    message: "Intern school:",
+                    type: "input",
+                    name: "intSchool",
+                    validate: input => {
+                        if (input) {
+                            return true;
+                        }
+                        else {
+                            console.log("Please enter a school")
+                        }
+                    }
+                },
+                {
+                    message: 'Choose next employee below:',
+                    type: 'list',
+                    name: 'add',
+                    choices: [
+                        "Intern",
+                        "Engineer",
+                        "I am finished",
+                    ]
+                }])
+    
+            //Push response data to outputAns array
+            .then((r) => {
+                outputAns.push(r)
+                //Create a new instance of Intern
+                var newInt = new Intern(r.intName, r.intId, r.intEmail, r.intSchool);
+    
+                //Create new employee card with Intern data
+                let intName = newInt.getName();
+                let intID = newInt.getId();
+                let intEmail = newInt.getEmail();
+                let intSchool = newInt.getSchool();
+                let role = newInt.getRole();
+    
+                var card =
+                    `<!--Card-->
+                <article class="container shadow-md bg-blue-100 rounded-lg text-center">
+                <div class="bg-blue-900 rounded-t-lg py-2 capitalize">
+                <h1 class="text-3xl text-white font-semibold">${intName}</h1>
+                <h2 class="text-lg text-slate-300">ID: ${intID}</h2>
+                </div>
+                <div class="ml-3 m-2 text-xl font-semibold">${role}</div>
+                <div class="ml-3 mb-2 hover:text-blue-700 hover:font-semibold"><a href = "mailto: ${intEmail}">${intEmail}</a></div>
+                <div class="ml-3 mb-3">Education: ${intSchool}</div>
+                </article>`
+    
+                //Add new card to htmlCards string
+                htmlCards += card
+    
+                //If user selects to add an intern, run addIntern function
+                if (r.add == "Intern") {
+                    addIntern()
+                }
+                //If user selects to add an engineer, run addEngineer function
+                else if (r.add == "Engineer") {
+                    addEngineer();
+                }
+                //If user selects 'I am finished', run html function and create html document
+                else {
+                    html();
+                }
+            })
+    }
