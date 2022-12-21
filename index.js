@@ -1,9 +1,9 @@
 var fs = require('fs');
 var inquirer = require('inquirer');
-const Employee = require('./lib/employee')
-const Manager = require("./lib/manager");
-const Intern = require('./lib/intern')
-const Engineer = require('./lib/engineer');
+const Employee = require('./lib/Employee')
+const Manager = require("./lib/Manager");
+const Intern = require('./lib/Intern')
+const Engineer = require('./lib/Engineer');
 const { Console } = require('console');
 
 //Empty string for card HTML to fill after entered by user in CLI
