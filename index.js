@@ -120,3 +120,45 @@ inquirer
         }
 
     ])
+
+     //Push response data to outputAns array
+     .then((r) => {
+        outputAns.push(r)
+        //Create a new instance of Manager
+        var newMg = new Manager(r.manName, r.manId, r.manEmail, r.manOffice);
+
+        let mgName = newMg.getName();
+        let mgID = newMg.getId();
+        let mgEmail = newMg.getEmail();
+        let mgOffice = newMg.getOffice();
+        let role = newMg.getRole();
+
+        //Create new employee card with Manager data
+        var card =
+            `<!--Card-->
+            <article class="container shadow-md bg-blue-100 rounded-lg text-center">
+            <div class="bg-blue-900 rounded-t-lg py-2 capitalize">
+            <h1 class="text-3xl text-white font-semibold">${mgName}</h1>
+            <h2 class="text-lg text-slate-300">ID: ${mgID}</h2>
+            </div>
+            <div class="ml-3 m-2 text-xl font-semibold">${role}</div>
+            <div class="ml-3 mb-2 hover:text-blue-700 hover:font-semibold"><a href = "mailto: ${mgEmail}">${mgEmail}</a></div>
+            <div class="ml-3 mb-3">Office: ${mgOffice}</div>
+            </article>`;
+
+        //Add new card to htmlCards string
+        htmlCards += card
+
+        //If user selects to add an intern, run addIntern function
+        if (r.add == "Intern") {
+            addIntern()
+        }
+        //If user selects to add an engineer, run addEngineer function
+        else if (r.add == "Engineer") {
+            addEngineer();
+        }
+        //If user selects 'I am finished', run html function and create html document
+        else {
+            html();
+        }
+    })
